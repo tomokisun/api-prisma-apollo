@@ -1,6 +1,6 @@
 import { Resolvers } from './types/generated-types'
 
-import banners from './queries/banners.js'
+import banners from './queries/banners'
 
 const resolvers: Resolvers = {
   Query: {
