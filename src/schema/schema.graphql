@@ -1,0 +1,5 @@
+# import * from "banner.graphql"
+
+type Query {
+  banners: [Banner!]!
+}
