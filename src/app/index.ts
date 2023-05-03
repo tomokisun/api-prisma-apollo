@@ -27,6 +27,6 @@ startStandaloneServer(server, {
     const userAgent = req.headers['User-Agent'] as string
     return createContext(userAgent)
   },
-}).then(url => {
+}).then(({ url }) => {
   console.log(`🚀  Server ready at: ${url}`)
 })

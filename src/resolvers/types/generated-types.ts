@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { Context } from './context';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -15,16 +16,17 @@ export type Scalars = {
 };
 
 export type Banner = {
-  __typename?: 'Banner';
-  title?: Maybe<Scalars['String']>;
+  readonly __typename?: 'Banner';
+  readonly title?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
-  __typename?: 'Query';
-  banners: Array<Banner>;
+  readonly __typename?: 'Query';
+  readonly banners: ReadonlyArray<Banner>;
 };
 
-
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -94,32 +96,32 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
+export type ResolversTypes = ResolversObject<{
   Banner: ResolverTypeWrapper<Banner>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
-};
+}>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
+export type ResolversParentTypes = ResolversObject<{
   Banner: Banner;
   Boolean: Scalars['Boolean'];
   Query: {};
   String: Scalars['String'];
-};
+}>;
 
-export type BannerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Banner'] = ResolversParentTypes['Banner']> = {
+export type BannerResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Banner'] = ResolversParentTypes['Banner']> = ResolversObject<{
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  banners?: Resolver<Array<ResolversTypes['Banner']>, ParentType, ContextType>;
-};
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  banners?: Resolver<ReadonlyArray<ResolversTypes['Banner']>, ParentType, ContextType>;
+}>;
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = Context> = ResolversObject<{
   Banner?: BannerResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-};
+}>;
 
